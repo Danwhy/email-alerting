@@ -4,9 +4,9 @@
 
 This is a tutorial for setting up email alerts on your application using Mandrill, a delivery API for sending transactional emails from websites and applications.
 
-Depending on your objectives, you'll want to start at different points in this tutorial. The first part of the tutorial is a basic introduction to using Mandrill front-end, whereas the second part of the tutorial is more practical for using it server-side. It's worth going through the process front-end before you graduate to back-end email alerting.
+Depending on your objectives, you'll want to start at different points in this tutorial. The first part of the tutorial is a basic introduction to using Mandrill front-end, whereas the second part of the tutorial is more practical for using it server-side with hapi. It's worth going through the process front-end before you graduate to back-end email alerting.
 
-* Very basic front end tutorial
+* [Very basic front end tutorial](https://github.com/Danwhy/email-alerting#front-end-tutorial)
 * More complex back end tutorial
 
 ## Why use Mandrill?
@@ -15,7 +15,7 @@ Mandrill is a very popular API for sending transactional emails, run by MailChim
 
 ## Front-end tutorial
 
-This tutorial will teach you how to send an email from the front-end of your website, with no server-side coding necessary. All credit to [this tutorial](https://medium.com/@mariusc23/send-an-email-using-only-javascript-b53319616782) for teaching us how to do it first.
+This tutorial will teach you how to send an email from the front-end of your website, with no server-side coding necessary. All credit to [this tutorial](https://medium.com/@mariusc23/send-an-email-using-only-javascript-b53319616782) for teaching us how to do it first (and providing the sample code).
 
 ### Step 1: get an API key
 
@@ -23,7 +23,7 @@ Register for [Mandrill](http://mandrillapp.com/). Sign in to get an API key on t
 
 ### Step 2: load jQuery
 
-You will need jQuery for this tutorial (although you're welcome to write your own AJAX call or use another library) Load it in script tags at the bottom of your HTML file.
+You will need jQuery for this tutorial (although you're welcome to write your own AJAX call or use another library). Load it in script tags at the bottom of your HTML file.
 
 ```javascript
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
@@ -80,3 +80,28 @@ $.ajax({
 This method is really just to illustrate the concept of communicating with the Mandrill API. Doing this process front-end is not a good idea, as your API key will be visible to everyone visiting your site.
 
 ## Back-end tutorial
+
+## How to run the demo
+
+The files in this repo are the demo we built for the back-end tutorial. You can run the project yourself by cloning the repo and running it on a server.
+
+You will need to have node.js, nodemon and hapi installed, plus a basic understanding of git and your terminal to get this working.
+
+### 1. Clone the repo
+
+```sh
+git clone https://github.com/Danwhy/email-alerting
+```
+
+### 2. Install the node.js dependencies:
+
+```sh
+npm install
+```
+
+### 3. Run the Server with [Nodemon](https://github.com/remy/nodemon):
+
+```sh
+nodemon server.js
+```
+### 4. Go to localhost:8000 in your browser.
