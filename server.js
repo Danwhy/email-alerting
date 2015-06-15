@@ -2,6 +2,8 @@ var Hapi = require("hapi");
 var server = new Hapi.Server();
 var http = require("http");
 var Path = require("path");
+var mandrill = require("mandrill-api/mandrill");
+var mandrill_client = new mandrill.Mandrill(process.env.SECRET);
 
 server.connection({
 	port: Number(process.argv[2] || 3000),
@@ -29,14 +31,9 @@ server.route({
 });
 
 function sendEmail(email) {
-	var req = http.request({
-		host: "mandrillapp.com",
-		path: "/api/1.0/messages/send.json",
-		method: "POST"		
-	});
 	var data = {
-		'key': process.env.SECRET,
-    	'message': {
+		
+    	
 	      	'from_email': 'danwhy@gmail.com',
 	      	'to': [
 	          {
@@ -48,13 +45,12 @@ function sendEmail(email) {
 		      'autotext': 'true',
 		      'subject': 'YOUR SUBJECT HERE!',
 		      'html': 'YOUR EMAIL CONTENT HERE! YOU CAN USE HTML!'
-		}
-	
 	};
-	req.on("error", function(e) {
-		console.log(e.message);
+	mandrill_client.messages.send({"message": data, "async": false},function(result) {
+		console.log(result);
+	}, function(e) {
+		console.log("Error " + e.message);
 	});
-	req.end(JSON.stringify(data));
 }
 
 server.start(function(err) {
