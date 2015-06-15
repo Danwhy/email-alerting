@@ -140,6 +140,8 @@ server.route({
 ```
 ### Step 3: set up a function to send the email using the Mandrill API
 
+Write a function to send the email, using the Mandrill API. This function "sendEmail" sends posts requests to the Mandrill client which in turn sends the email to the user.
+
 ```javascript
 function sendEmail(email) {
 	var data = {
