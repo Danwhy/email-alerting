@@ -1,0 +1,21 @@
+{
+  "name": "email-alerting",
+  "version": "0.0.0",
+  "description": "Email - alerting",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Danwhy/email-alerting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Danwhy/email-alerting/issues"
+  },
+  "dependencies": {
+    "handlebars": "^3.0.3"
+  }
+}
