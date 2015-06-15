@@ -202,4 +202,4 @@ npm install
 ```sh
 nodemon server.js
 ```
-### 4. Go to localhost:8000 in your browser.
+### 4. Go to localhost:3000 in your browser.
