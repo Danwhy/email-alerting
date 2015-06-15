@@ -81,6 +81,102 @@ This method is really just to illustrate the concept of communicating with the M
 
 ## Back-end tutorial
 
+This part of the tutorial will show you how to send email alerts server-side using hapi and the Mandrill Node.js API.
+
+### Step 1: make the request on the client side
+
+Make a post request to send the emails. We did this using jQuery, like so:
+
+```javascript
+$('#send').click(function() {
+$.ajax({
+  type: 'POST',
+  url: '/signup',
+  data: {
+    "email": $("#email").val()
+    }
+ }).done(function(response) {
+   console.log("testing"); // if you're into that sorta thing
+ });
+});
+```
+
+### Step 2: set up the hapi server
+
+Set up a simple hapi server with two routes: one to fetch the index.html file, and another to receive the post request with the email address.
+
+You'll see we require hapi and the Mandrill API. We've also stored the API key in an environment variable called "SECRET".
+
+```javascript
+var Hapi = require("hapi");
+var server = new Hapi.Server();
+var mandrill = require("mandrill-api/mandrill");
+var mandrill_client = new mandrill.Mandrill(process.env.SECRET);
+
+server.connection({
+	port: Number(process.argv[2] || 3000),
+	host: "localhost"
+});
+
+server.route({
+	method: "GET",
+	path: "/{filename}",
+	handler: {
+		file: function(request){
+			return request.params.filename;
+		}
+	}
+});
+
+server.route({
+	method: "POST",
+	path: "/signup",
+	config: {
+		handler: function(req, res) {
+			sendEmail(req.payload.email);
+		}
+	}
+});
+```
+### Step 3: set up a function to send the email using the Mandrill API
+
+```javascript
+function sendEmail(email) {
+	var data = {
+
+
+	      	'from_email': 'danwhy@gmail.com',
+	      	'to': [
+	          {
+	            'email': email,
+	            'name': 'dan',
+	            'type': 'to'
+	          }
+	        ],
+		      'autotext': 'true',
+		      'subject': 'YOUR SUBJECT HERE!',
+		      'html': 'YOUR EMAIL CONTENT HERE! YOU CAN USE HTML!'
+	};
+	mandrill_client.messages.send({"message": data, "async": false},function(result) {
+		console.log(result);
+	}, function(e) {
+		console.log("Error " + e.message);
+	});
+}
+```
+### Step 4: start the server
+
+Start the server with "server.start" which listens for requests from the client.
+
+```javascript
+server.start(function(err) {
+	if(err) {
+		console.log(err);
+	}
+	console.log("Server is running");
+});
+```
+
 ## How to run the demo
 
 The files in this repo are the demo we built for the back-end tutorial. You can run the project yourself by cloning the repo and running it on a server.
