@@ -25,15 +25,15 @@ server.route({
 	path: "/signup",
 	config: {
 		handler: function(req, res) {
-			sendEmail(req.payload.email);			
+			sendEmail(req.payload.email);
 		}
 	}
 });
 
 function sendEmail(email) {
 	var data = {
-		
-    	
+
+
 	      	'from_email': 'danwhy@gmail.com',
 	      	'to': [
 	          {
